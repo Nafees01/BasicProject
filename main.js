@@ -9,19 +9,25 @@ const showList = document.querySelector('.show');
 
 const showUser = document.querySelector('.user');
 
+const createUser = document.querySelector('.newuser');
+
 let userShow = '';
 let output = '';
+let create ='';
 
 
-//GET
- 
-fetch('https://reqres.in/api/users/2')
-.then(res=> res.json())
-.then(post=> {
-   
-    //JSON.stringify(post);
-    console.log(post);
-   userShow += ` <table class="table table-bordered">
+//GET USERS
+
+fetch('https://reqres.in/api/users')
+    .then(res => res.json())
+    .then(post => {
+
+        //JSON.stringify(post);
+
+        //console.log(post);
+        post.data.forEach(element => {
+
+            userShow += ` <table class="table table-bordered">
    <thead>
        <tr>
            <th scope="col">Id</th>
@@ -33,19 +39,20 @@ fetch('https://reqres.in/api/users/2')
    </thead>
    <tbody>
        <tr>
-           <td>${post.data.id}</td>
-           <td>${post.data.email}</td>
-           <td>${post.data.first_name}</td>
-           <td>${post.data.last_name}</td>
-           <td><img src = ${post.data.avatar}></td>
+           <td>${element.id}</td>
+           <td>${element.email}</td>
+           <td>${element.first_name}</td>
+           <td>${element.last_name}</td>
+           <td><img src = ${element.avatar}></td>
        </tr>
    </tbody>
 </table>`;
-//console.log(userShow);
-showUser.innerHTML=userShow;
-addUser.append(showUser);
-  
-})
+        })
+        //console.log(userShow);
+        showUser.innerHTML = userShow;
+        addUser.append(showUser);
+
+    })
 
 
 function goToList() {
@@ -55,9 +62,10 @@ function goToList() {
 
 function goToForm() {
     document.getElementById("list").style.display = "block";
-    document.getElementById("create").style.display = "none";  
+    document.getElementById("create").style.display = "none";
 }
 
+//POST REGISTER
 
 addUser.addEventListener('submit', (e) => {
     const emailValue = document.getElementById('exampleInputEmail1');
@@ -82,8 +90,8 @@ addUser.addEventListener('submit', (e) => {
 
 function renderEmail(json) {
     //console.log(json);
-    if (json.id!==undefined && json.token!==undefined) {
-       output+=` <table class="table table-bordered">
+    if (json.id !== undefined && json.token !== undefined) {
+        output += ` <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -99,12 +107,12 @@ function renderEmail(json) {
                 </tr>
             </tbody>
         </table>`;
-    showList.innerHTML = output;
-    addUser.append(showList);
-    alert ("Login successfully");
+        showList.innerHTML = output;
+        addUser.append(showList);
+        alert("Registerd successfully");
     }
-    else{
-        alert ("Login Unsuccessful");
+    else {
+        alert("Registration Unsuccessful");
     }
     //const h2 = document.createElement('h2')
     //h2.innerHTML = `<h2>${json.id}</h2>`
@@ -113,32 +121,89 @@ function renderEmail(json) {
     //jokesHTML.innerHTML += '<p class="joke">' + joke.joke + '</p>'
     //postField.innerHTML+= json.email;
 }
-if(addUser){
-userLogin.addEventListener('submit', (e) => {
-    const emailVal = document.getElementById('exampleInputEmail');
-    const passVal = document.getElementById('exampleInputPassword2');
+
+// POST LOGIN
+
+    userLogin.addEventListener('submit', (e) => {
+        const emailVal = document.getElementById('exampleInputEmail2');
+        const passVal = document.getElementById('exampleInputPassword2');
+        e.preventDefault();
+
+        //console.log(emailValue.value);
+        fetch('https://reqres.in/api/login', {
+            method: 'POST',
+            headers:
+                { "Content-type": "application/json;charset=UTF-8" },
+            body: JSON.stringify({
+                email: emailVal.value,
+                password: passVal.value
+
+            })
+        })
+            .then(res => res.json())
+            .then(json => renderLogin(json));
+
+    })
+
+
+function renderLogin(json) {
+    //onsole.log(json);
+    if (json.token!==undefined)
+    alert("Login successfully");
+    else
+    alert("Login Unsuccessful");
+
+}
+
+
+//POST CREATE USER
+
+userLogin.document.getElementById('entry').addEventListener('submit', (e) => {
+    const nameValue = document.getElementById('name1');
+    const jobValue = document.getElementById('job1');
     e.preventDefault();
+    //console.log('Form Submitted');
 
     //console.log(emailValue.value);
-    fetch('https://reqres.in/api/login', {
+    fetch('https://reqres.in/api/users', {
         method: 'POST',
         headers:
             { "Content-type": "application/json;charset=UTF-8" },
         body: JSON.stringify({
-            email: emailVal.value,
-            password: passVal.value
+            name: nameValue.value,
+            job: jobValue.value
 
         })
     })
         .then(res => res.json())
-        .then(book => renderLogin(book));
+        .then(json => createMember(json));
 
 })
-}
 
-function renderLogin(book){
+
+function createMember(json)
+{
     console.log(json);
-    //if (json.token!==undefined)
-    alert ("Login successfully");
-}
+    create+=  ` <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Job</th>
+            <th scope="col">Id</th>
+            <th scope="col">Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>${json.name}</td>
+            <td>${json.job}</td>
+            <td>${json.id}</td>
+            <td>${json.createdAt}</td>
+        </tr>
+    </tbody>
+</table>`;
+createUser.innerHTML = create;
+userLogin.append(createUser);
 
+}

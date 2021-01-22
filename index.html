@@ -10,44 +10,41 @@
 
 <body>
     <div id="create">
-    <form class="add-post-form">
-        <div class="container" >
-            <h1>Register</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <div class="show">
+        <form class="add-post-form">
+            <div class="container">
+                <h1>Register</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="show">
+
+                </div>
+
+                <div class="user">
+
+                </div>
+                <div class="container signin">
+                    <p>Already have an account? <a href="#" onclick="goToForm()">Sign in</a>.</p>
+                </div>
+                <!--<button type="submit" class="btn btn-primary" >Show Users</button>-->
 
             </div>
 
-            <div class="user">
-
-            </div>
-            <div class="container signin">
-                <p>Already have an account? <a href="#" onclick="goToForm()">Sign in</a>.</p>
-            </div>
-            <!--<button type="submit" class="btn btn-primary" >Show Users</button>-->
-
-        </div>
-       
-        
-
-
-    </form>
+        </form>
     </div>
 
     <div id="list">
-    <form class="second"></form>
-        <div class="container" >
+        <form class="second">
+        <div class="container">
             <h1>Sign In</h1>
             <div class="form-group">
                 <label for="exampleInputEmail2">Email address</label>
@@ -60,12 +57,27 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <div class="container signin" id="okay">
-                <p>Back to Register<a href="#" onclick="goToList()">Register</a>.</p>
+
             </div>
+            <p>Back to Register<a href="#" onclick="goToList()">Register</a>.</p>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name1" aria-describedby="emailHelp"
+                    placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+                <label for="job">Job</label>
+                <input type="text" class="form-control" id="job1" placeholder="Password">
+            </div>
+            <button type="submit" id="entry" class="btn btn-primary">Input Entries</button>
+
         </div>
-        
-    </form>
-</div>
+        <div class="newuser">
+
+        </div>
+
+        </form>
+    </div>
 
     <script src="main.js"></script>
 </body>
