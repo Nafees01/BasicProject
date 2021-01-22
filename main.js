@@ -6,7 +6,46 @@ const url = 'https://reqres.in/api/register';
 const userLogin = document.querySelector('.second');
 
 const showList = document.querySelector('.show');
+
+const showUser = document.querySelector('.user');
+
+let userShow = '';
 let output = '';
+
+
+//GET
+ 
+fetch('https://reqres.in/api/users/2')
+.then(res=> res.json())
+.then(post=> {
+   
+    //JSON.stringify(post);
+    console.log(post);
+   userShow += ` <table class="table table-bordered">
+   <thead>
+       <tr>
+           <th scope="col">Id</th>
+           <th scope="col">Email</th>
+           <th scope="col">First Name</th>
+           <th scope="col">Last Name</th>
+           <th scope="col">Avatar</th>
+       </tr>
+   </thead>
+   <tbody>
+       <tr>
+           <td>${post.data.id}</td>
+           <td>${post.data.email}</td>
+           <td>${post.data.first_name}</td>
+           <td>${post.data.last_name}</td>
+           <td><img src = ${post.data.avatar}></td>
+       </tr>
+   </tbody>
+</table>`;
+//console.log(userShow);
+showUser.innerHTML=userShow;
+addUser.append(showUser);
+  
+})
 
 
 function goToList() {
