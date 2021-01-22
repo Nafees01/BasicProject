@@ -3,7 +3,9 @@ const url = 'https://reqres.in/api/register';
 //const emailValue = document.getElementById('exampleInputEmail1');
 //const passValue = document.getElementById('exampleInputPassword1');
 
-const userLogin = document.querySelector('.second');
+const userLogin = document.querySelector('.second' , '.entry');
+
+const userCreate = document.querySelector('.second');
 
 const showList = document.querySelector('.show');
 
@@ -150,15 +152,14 @@ function renderLogin(json) {
     //onsole.log(json);
     if (json.token!==undefined)
     alert("Login successfully");
-    else
-    alert("Login Unsuccessful");
-
+    //else
+    //alert("Login Unsuccessful")
 }
 
 
 //POST CREATE USER
 
-userLogin.document.getElementById('entry').addEventListener('submit', (e) => {
+userCreate.addEventListener('submit', (e) => {
     const nameValue = document.getElementById('name1');
     const jobValue = document.getElementById('job1');
     e.preventDefault();
@@ -204,6 +205,6 @@ function createMember(json)
     </tbody>
 </table>`;
 createUser.innerHTML = create;
-userLogin.append(createUser);
+userCreate.append(createUser);
 
 }
