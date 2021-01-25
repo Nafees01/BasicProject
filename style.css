@@ -8,3 +8,10 @@
   #header{
       margin: auto;
   }
+
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    text-align: center;
+    font-size: 30px;
+  }

@@ -1,3 +1,4 @@
+
 const addUser = document.querySelector('.add-post-form');
 const url = 'https://reqres.in/api/register';
 //const emailValue = document.getElementById('exampleInputEmail1');
@@ -9,54 +10,17 @@ const userCreate = document.querySelector('.entry');
 
 const showList = document.querySelector('.show');
 
-const showUser = document.querySelector('.user');
 
 const createUser = document.querySelector('.newuser');
 
-const show = document.querySelector('.hoho');
 
-let userShow = '';
+
+
 let output = '';
 let create ='';
 
 
 //GET USERS
-
-fetch('https://reqres.in/api/users')
-    .then(res => res.json())
-    .then(post => {
-
-        //JSON.stringify(post);
-
-        //console.log(post);
-        post.data.forEach(element => {
-
-            userShow += ` <table class="table table-bordered">
-   <thead>
-       <tr>
-           <th scope="col">Id</th>
-           <th scope="col">Email</th>
-           <th scope="col">First Name</th>
-           <th scope="col">Last Name</th>
-           <th scope="col">Avatar</th>
-       </tr>
-   </thead>
-   <tbody>
-       <tr>
-           <td>${element.id}</td>
-           <td>${element.email}</td>
-           <td>${element.first_name}</td>
-           <td>${element.last_name}</td>
-           <td><img src = ${element.avatar}></td>
-       </tr>
-   </tbody>
-</table>`;
-        })
-        //console.log(userShow);
-        showUser.innerHTML = userShow;
-        show.append(showUser);
-
-    })
 
 
 function goToList() {
@@ -75,6 +39,7 @@ function resetInput(){
 }
 
 //POST REGISTER
+console.log(addUser);
 
 addUser.addEventListener('submit', (e) => {
     const emailValue = document.getElementById('exampleInputEmail1');
@@ -200,15 +165,35 @@ function createMember(json)
     </thead>
     <tbody>
         <tr>
-            <th scope="row">1</th>
             <td>${json.name}</td>
             <td>${json.job}</td>
             <td>${json.id}</td>
             <td>${json.createdAt}</td>
         </tr>
+        <a href="#" id="delete">Delete Entry</a>
     </tbody>
 </table>`;
 createUser.innerHTML = create;
 userCreate.append(createUser);
+$("#delete").bind('click', function(){
+    console.log("Delete Event");
+    fetch('https://reqres.in/api/users/2' , {
+    method: 'DELETE',})
+    .then(res => 
+        {
+
+           if( res.status===204)
+           {
+               alert('Sucees');
+               location.reload();
+           }
+           else
+           {
+               alert("Delete Unsucessful");
+           }
+            
+    
+        })
+});
 
 }
