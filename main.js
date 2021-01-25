@@ -3,9 +3,9 @@ const url = 'https://reqres.in/api/register';
 //const emailValue = document.getElementById('exampleInputEmail1');
 //const passValue = document.getElementById('exampleInputPassword1');
 
-const userLogin = document.querySelector('.second' , '.entry');
+const userLogin = document.querySelector('.second');
 
-const userCreate = document.querySelector('.second');
+const userCreate = document.querySelector('.entry');
 
 const showList = document.querySelector('.show');
 
@@ -185,7 +185,7 @@ userCreate.addEventListener('submit', (e) => {
 function createMember(json)
 {
     console.log(json);
-    create+=  ` <table class="table table-bordered">
+    create+=  ` <br><table class="table table-bordered">
     <thead>
         <tr>
             <th scope="col">Name</th>
