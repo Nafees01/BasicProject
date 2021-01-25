@@ -13,6 +13,8 @@ const showUser = document.querySelector('.user');
 
 const createUser = document.querySelector('.newuser');
 
+const show = document.querySelector('.hoho');
+
 let userShow = '';
 let output = '';
 let create ='';
@@ -52,7 +54,7 @@ fetch('https://reqres.in/api/users')
         })
         //console.log(userShow);
         showUser.innerHTML = userShow;
-        addUser.append(showUser);
+        show.append(showUser);
 
     })
 
@@ -65,6 +67,11 @@ function goToList() {
 function goToForm() {
     document.getElementById("list").style.display = "block";
     document.getElementById("create").style.display = "none";
+}
+
+function resetInput(){
+    document.getElementById("exampleInputEmail2").value = '';
+    document.getElementById("exampleInputPassword2").value = '';
 }
 
 //POST REGISTER
@@ -112,9 +119,6 @@ function renderEmail(json) {
         showList.innerHTML = output;
         addUser.append(showList);
         alert("Registerd successfully");
-    }
-    else {
-        alert("Registration Unsuccessful");
     }
     //const h2 = document.createElement('h2')
     //h2.innerHTML = `<h2>${json.id}</h2>`
